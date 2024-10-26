@@ -1,4 +1,11 @@
+import requests
+
 __base_url: str = "https://api.etherscan.io/v2/api"
+
+
+def __connect_api(url: str):
+    return requests.get(url).json()['result']
+
 
 SUPPORTED_CHAINS: dict[str, int] = {
     "Etherscan": 1,
