@@ -175,7 +175,7 @@ class EtherScanV2:
         self.__valid_params = Metadata.valid_params
 
     def __connect_api(self, module: str, action: str, params: dict):
-        api_params = {k: v for k, v in params.items() if k in __valid_params[action]}
+        api_params = {k: v for k, v in params.items() if k in self.__valid_params[action]}
         url = f"{self.__base_url}?module={module}&action={action}&{urlencode(api_params)}"
         res = requests.get(url).json()
         if res['status'] == '0' or res['message'] == 'NOTOK':
