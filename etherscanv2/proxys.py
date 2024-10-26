@@ -1,86 +1,45 @@
-from etherscanv2 import __base_url, __connect_api
-from urllib.parse import urlencode
+from etherscanv2 import EtherScanV2
 
 
-def eth_blockNumber(apikey: str, chainid: int):
-    params, module, action = locals(), "proxy", "eth_blockNumber"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+class Proxy(EtherScanV2):
+    def eth_blockNumber(self, **params):
+        return self.__connect_api("proxy", "eth_blockNumber", params)
 
+    def eth_getBlockByNumber(self, **params):
+        return self.__connect_api("proxy", "eth_getBlockByNumber", params)
 
-def eth_getBlockByNumber(apikey: str, chainid: int, tag: str, boolean: str):
-    params, module, action = locals(), "proxy", "eth_getBlockByNumber"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def eth_getUncleByBlockNumberAndIndex(self, **params):
+        return self.__connect_api("proxy", "eth_getUncleByBlockNumberAndIndex", params)
 
+    def eth_getBlockTransactionCountByNumber(self, **params):
+        return self.__connect_api("proxy", "eth_getBlockTransactionCountByNumber", params)
 
-def eth_getUncleByBlockNumberAndIndex(apikey: str, chainid: int, tag: str, index: str):
-    params, module, action = locals(), "proxy", "eth_getUncleByBlockNumberAndIndex"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def eth_getTransactionByHash(self, **params):
+        return self.__connect_api("proxy", "eth_getTransactionByHash", params)
 
+    def eth_getTransactionByBlockNumberAndIndex(self, **params):
+        return self.__connect_api("proxy", "eth_getTransactionByBlockNumberAndIndex", params)
 
-def eth_getBlockTransactionCountByNumber(apikey: str, chainid: int, tag: str):
-    params, module, action = locals(), "proxy", "eth_getBlockTransactionCountByNumber"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def eth_getTransactionCount(self, **params):
+        return self.__connect_api("proxy", "eth_getTransactionCount", params)
 
+    def eth_sendRawTransaction(self, **params):
+        return self.__connect_api("proxy", "eth_sendRawTransaction", params)
 
-def eth_getTransactionByHash(apikey: str, chainid: int, txhash: str):
-    params, module, action = locals(), "proxy", "eth_getTransactionByHash"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def eth_getTransactionReceipt(self, **params):
+        return self.__connect_api("proxy", "eth_getTransactionReceipt", params)
 
+    def eth_call(self, **params):
+        return self.__connect_api("proxy", "eth_call", params)
 
-def eth_getTransactionByBlockNumberAndIndex(apikey: str, chainid: int, tag: str, index: str):
-    params, module, action = locals(), "proxy", "eth_getTransactionByBlockNumberAndIndex"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def eth_getCode(self, **params):
+        return self.__connect_api("proxy", "eth_getCode", params)
 
+    def eth_getStorageAt(self, **params):
+        return self.__connect_api("proxy", "eth_getStorageAt", params)
 
-def eth_getTransactionCount(apikey: str, chainid: int, address: str, tag: str):
-    params, module, action = locals(), "proxy", "eth_getTransactionCount"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def eth_gasPrice(self, **params):
+        return self.__connect_api("proxy", "eth_gasPrice", params)
 
-
-def eth_sendRawTransaction(apikey: str, chainid: int, address: str, hex: str):
-    params, module, action = locals(), "proxy", "eth_sendRawTransaction"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
-
-
-def eth_getTransactionReceipt(apikey: str, chainid: int, address: str, txhash: str):
-    params, module, action = locals(), "proxy", "eth_getTransactionReceipt"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
-
-
-def eth_call(apikey: str, chainid: int, address: str, to: str, data: str, tag: str):
-    params, module, action = locals(), "proxy", "eth_call"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
-
-
-def eth_getCode(apikey: str, chainid: int, address: str, tag: str):
-    params, module, action = locals(), "proxy", "eth_getCode"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
-
-
-def eth_getStorageAt(apikey: str, chainid: int, address: str, position: str, tag: str):
-    params, module, action = locals(), "proxy", "eth_getStorageAt"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
-
-
-def eth_gasPrice(apikey: str, chainid: int):
-    params, module, action = locals(), "proxy", "eth_gasPrice"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
-
-
-def eth_estimateGas(apikey: str, chainid: int, data: str, to: str, value: str, gas: str, gasprice: str):
-    params, module, action = locals(), "proxy", "eth_estimateGas"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def eth_estimateGas(self, **params):
+        return self.__connect_api("proxy", "eth_estimateGas", params)

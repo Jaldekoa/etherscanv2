@@ -1,56 +1,30 @@
-from etherscanv2 import __base_url, __connect_api
-from urllib.parse import urlencode
+from etherscanv2 import EtherScanV2
 
 
-def tokensupply(apikey: str, chainid: int, contractaddress: str):
-    params, module, action = locals(), "stats", "tokensupply"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+class Tokens(EtherScanV2):
+    def tokensupply(self, **params):
+        return self.__connect_api("stats", "tokensupply", params)
 
+    def tokenbalance(self, **params):
+        return self.__connect_api("account", "tokenbalance", params)
 
-def tokenbalance(apikey: str, chainid: int, contractaddress: str, address: str):
-    params, module, action = locals(), "account", "tokenbalance"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def tokensupplyhistory(self, **params):
+        return self.__connect_api("stats", "tokensupplyhistory", params)
 
+    def tokenbalancehistory(self, **params):
+        return self.__connect_api("account", "tokenbalancehistory", params)
 
-def tokensupplyhistory(apikey: str, chainid: int, contractaddress: str, blockno: int):
-    params, module, action = locals(), "stats", "tokensupplyhistory"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def tokenholderlist(self, **params):
+        return self.__connect_api("token", "tokenholderlist", params)
 
+    def tokeninfo(self, **params):
+        return self.__connect_api("token", "tokeninfo", params)
 
-def tokenbalancehistory(apikey: str, chainid: int, contractaddress: str, blockno: int):
-    params, module, action = locals(), "account", "tokensupplyhistory"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def addresstokenbalance(self, **params):
+        return self.__connect_api("account", "addresstokenbalance", params)
 
+    def addresstokennftbalance(self, **params):
+        return self.__connect_api("account", "addresstokennftbalance", params)
 
-def tokenholderlist(apikey: str, chainid: int, contractaddress: str, page: int, offset: int):
-    params, module, action = locals(), "token", "tokenholderlist"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
-
-
-def tokeninfo(apikey: str, chainid: int, contractaddress: str):
-    params, module, action = locals(), "token", "tokeninfo"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
-
-
-def addresstokenbalance(apikey: str, chainid: int, address: str, page: int, offset: int):
-    params, module, action = locals(), "account", "addresstokenbalance"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
-
-
-def addresstokennftbalance(apikey: str, chainid: int, address: str, page: int, offset: int):
-    params, module, action = locals(), "account", "addresstokennftbalance"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
-
-
-def addresstokennftinventory(apikey: str, chainid: int, contractaddress: str, page: int, offset: int):
-    params, module, action = locals(), "account", "addresstokennftinventory"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def addresstokennftinventory(self, **params):
+        return self.__connect_api("account", "addresstokennftinventory", params)

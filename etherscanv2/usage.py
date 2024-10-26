@@ -1,11 +1,10 @@
-from etherscanv2 import __base_url, __connect_api
-from urllib.parse import urlencode
+from etherscanv2 import EtherScanV2
+import requests
 
 
-def getapilimit(apikey: str, chainid: int):
-    params, module, action = locals(), "getapilimit", "getapilimit"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+class Usage(EtherScanV2):
+    def getapilimit(self):
+        return self.__connect_api("getapilimit", "getapilimit", params)
 
-def chainlist():
-    return __connect_api("https://api.etherscan.io/v2/chainlist")
+    def chainlist(self):
+        return requests.get("https://api.etherscan.io/v2/chainlist").json()['result']

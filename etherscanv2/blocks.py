@@ -1,50 +1,27 @@
-from etherscanv2 import __base_url, __connect_api
-from urllib.parse import urlencode
+from etherscanv2 import EtherScanV2
 
 
-def getblockreward(apikey: str, chainid: int, blockno: int):
-    params, module, action = locals(), "block", "getblockreward"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+class Blocks(EtherScanV2):
+    def getblockreward(self, **params):
+        return self.__connect_api("block", "getblockreward", params)
 
+    def getblockcountdown(self, **params):
+        return self.__connect_api("block", "getblockcountdown", params)
 
-def getblockcountdown(apikey: str, chainid: int, blockno: int):
-    params, module, action = locals(), "block", "getblockcountdown"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def getblocknobytime(self, **params):
+        return self.__connect_api("block", "getblocknobytime", params)
 
+    def dailyavgblocksize(self, **params):
+        return self.__connect_api("stats", "dailyavgblocksize", params)
 
-def getblocknobytime(apikey: str, chainid: int, timestamp: int, closest: str):
-    params, module, action = locals(), "block", "getblocknobytime"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def dailyblkcount(self, **params):
+        return self.__connect_api("stats", "dailyblkcount", params)
 
+    def dailyblockrewards(self, **params):
+        return self.__connect_api("stats", "dailyblockrewards", params)
 
-def dailyavgblocksize(apikey: str, chainid: int, startdate: str, enddate: str, sort: str):
-    params, module, action = locals(), "block", "dailyavgblocksize"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def dailyavgblocktime(self, **params):
+        return self.__connect_api("stats", "dailyavgblocktime", params)
 
-
-def dailyblkcount(apikey: str, chainid: int, startdate: str, enddate: str, sort: str):
-    params, module, action = locals(), "stats", "dailyblkcount"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
-
-
-def dailyblockrewards(apikey: str, chainid: int, startdate: str, enddate: str, sort: str):
-    params, module, action = locals(), "stats", "dailyblockrewards"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
-
-
-def dailyavgblocktime(apikey: str, chainid: int, startdate: str, enddate: str, sort: str):
-    params, module, action = locals(), "stats", "dailyavgblocktime"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
-
-
-def dailyuncleblkcount(apikey: str, chainid: int, startdate: str, enddate: str, sort: str):
-    params, module, action = locals(), "stats", "dailyuncleblkcount"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def dailyuncleblkcount(self, **params):
+        return self.__connect_api("stats", "dailyuncleblkcount", params)

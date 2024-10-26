@@ -1,73 +1,42 @@
-from etherscanv2 import __base_url, __connect_api
-from urllib.parse import urlencode
+from etherscanv2 import EtherScanV2
 
 
-def ethsupply(apikey: str, chainid: int):
-    params, module, action = locals(), "stats", "ethsupply"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+class Stats(EtherScanV2):
+    def ethsupply(self, **params):
+        return self.__connect_api("stats", "ethsupply", params)
 
-def ethsupply2(apikey: str, chainid: int):
-    params, module, action = locals(), "stats", "ethsupply2"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def ethsupply2(self, **params):
+        return self.__connect_api("stats", "ethsupply2", params)
 
-def ethprice(apikey: str, chainid: int):
-    params, module, action = locals(), "stats", "ethprice"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def ethprice(self, **params):
+        return self.__connect_api("stats", "ethprice", params)
 
-def chainsize(apikey: str, chainid: int, startdate: str, enddate: str, clienttype: str, syncmode: str, sort: str):
-    params, module, action = locals(), "stats", "chainsize"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def chainsize(self, **params):
+        return self.__connect_api("stats", "chainsize", params)
 
-def nodecount(apikey: str, chainid: int):
-    params, module, action = locals(), "stats", "nodecount"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def nodecount(self, **params):
+        return self.__connect_api("stats", "nodecount", params)
 
-def dailytxnfee(apikey: str, chainid: int):
-    params, module, action = locals(), "stats", "dailytxnfee"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def dailytxnfee(self, **params):
+        return self.__connect_api("stats", "dailytxnfee", params)
 
-def dailynewaddress(apikey: str, chainid: int, startdate: str, enddate: str, sort: str):
-    params, module, action = locals(), "stats", "dailynewaddress"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def dailynewaddress(self, **params):
+        return self.__connect_api("stats", "dailynewaddress", params)
 
-def dailynetutilization(apikey: str, chainid: int, startdate: str, enddate: str, sort: str):
-    params, module, action = locals(), "stats", "dailynetutilization"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def dailynetutilization(self, **params):
+        return self.__connect_api("stats", "dailynetutilization", params)
 
-def dailyavghashrate(apikey: str, chainid: int, startdate: str, enddate: str, sort: str):
-    params, module, action = locals(), "stats", "dailyavghashrate"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def dailyavghashrate(self, **params):
+        return self.__connect_api("stats", "dailyavghashrate", params)
 
-def dailytx(apikey: str, chainid: int, startdate: str, enddate: str, sort: str):
-    params, module, action = locals(), "stats", "dailytx"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def dailytx(self, **params):
+        return self.__connect_api("stats", "dailytx", params)
 
-def dailyavgnetdifficulty(apikey: str, chainid: int, startdate: str, enddate: str, sort: str):
-    params, module, action = locals(), "stats", "dailyavgnetdifficulty"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def dailyavgnetdifficulty(self, **params):
+        return self.__connect_api("stats", "dailyavgnetdifficulty", params)
 
-def ethdailymarketcap(apikey: str, chainid: int, startdate: str, enddate: str, sort: str):
-    params, module, action = locals(), "stats", "ethdailymarketcap"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def ethdailymarketcap(self, **params):
+        return self.__connect_api("stats", "ethdailymarketcap", params)
 
-def ethdailymarketcap(apikey: str, chainid: int, startdate: str, enddate: str, sort: str):
-    params, module, action = locals(), "stats", "ethdailymarketcap"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
-
-def ethdailyprice(apikey: str, chainid: int, startdate: str, enddate: str, sort: str):
-    params, module, action = locals(), "stats", "ethdailyprice"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def ethdailyprice(self, **params):
+        return self.__connect_api("stats", "ethdailyprice", params)

@@ -1,14 +1,12 @@
-from etherscanv2 import __base_url, __connect_api
-from urllib.parse import urlencode
+from etherscanv2 import EtherScanV2
 
 
-def getstatus(apikey: str, chainid: int, txhash: str):
-    params, module, action = locals(), "transaction", "getstatus"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+class Transactions(EtherScanV2):
+    def getstatus(self, **params):
+        return self.__connect_api("transaction", "getstatus", params)
 
+    def gettxreceiptstatus(self, **params):
+        return self.__connect_api("transaction", "gettxreceiptstatus", params)
 
-def gettxreceiptstatus(apikey: str, chainid: int, txhash: str):
-    params, module, action = locals(), "transaction", "gettxreceiptstatus"
-    url = f"{__base_url}?module={module}&action={action}&{urlencode(params)}"
-    return __connect_api(url)
+    def gettxreceiptstatus(self, **params):
+        return self.__connect_api("transaction", "gettxreceiptstatus", params)
