@@ -1,33 +1,34 @@
-from etherscanv2 import EtherScanV2
+class Accounts():
 
+    def __init__(self, etherscan):
+        self.etherscan = etherscan
 
-class Accounts(EtherScanV2):
     def balance(self, **params):
-        return self.__connect_api("account", "balance", params)
+        return self.etherscan._EtherScanV2__connect_api("account", "balance", params)
 
     def balancemulti(self, **params):
-        return self.__connect_api("account", "balancemulti", params)
+        return self.etherscan._EtherScanV2__connect_api("account", "balancemulti", params)
 
     def txlist(self, **params):
-        return self.__connect_api("account", "txlist", params)
+        return self.etherscan._EtherScanV2__connect_api("account", "txlist", params)
 
     def txlistinternal(self, **params):
-        return self.__connect_api("account", "txlistinternal", params)
+        return self.etherscan._EtherScanV2__connect_api("account", "txlistinternal", params)
 
     def tokentx(self, **params):
-        return self.__connect_api("account", "tokentx", params)
+        return self.etherscan._EtherScanV2__connect_api("account", "tokentx", params)
 
     def tokennfttx(self, **params):
-        return self.__connect_api("account", "tokennfttx", params)
+        return self.etherscan._EtherScanV2__connect_api("account", "tokennfttx", params)
 
     def token1155tx(self, **params):
-        return self.__connect_api("account", "token1155tx", params)
+        return self.etherscan._EtherScanV2__connect_api("account", "token1155tx", params)
 
     def getminedblocks(self, **params):
-        return self.__connect_api("account", "getminedblocks", params)
+        return self.etherscan._EtherScanV2__connect_api("account", "getminedblocks", params)
 
     def txsbeaconwithdrawal(self, **params):
-        return self.__connect_api("account", "txsBeaconWithdrawal", params)
+        return self.etherscan._EtherScanV2__connect_api("account", "txsBeaconWithdrawal", params)
 
     def balancehistory(self, **params):
-        return self.__connect_api("account", "balancehistory", params)
+        return self.etherscan._EtherScanV2__connect_api("account", "balancehistory", params)

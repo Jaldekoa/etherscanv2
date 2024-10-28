@@ -1,27 +1,28 @@
-from etherscanv2 import EtherScanV2
+class Blocks:
 
+    def __init__(self, etherscan):
+        self.etherscan = etherscan
 
-class Blocks(EtherScanV2):
     def getblockreward(self, **params):
-        return self.__connect_api("block", "getblockreward", params)
+        return self.etherscan._EtherScanV2__connect_api("block", "getblockreward", params)
 
     def getblockcountdown(self, **params):
-        return self.__connect_api("block", "getblockcountdown", params)
+        return self.etherscan._EtherScanV2__connect_api("block", "getblockcountdown", params)
 
     def getblocknobytime(self, **params):
-        return self.__connect_api("block", "getblocknobytime", params)
+        return self.etherscan._EtherScanV2__connect_api("block", "getblocknobytime", params)
 
     def dailyavgblocksize(self, **params):
-        return self.__connect_api("stats", "dailyavgblocksize", params)
+        return self.etherscan._EtherScanV2__connect_api("stats", "dailyavgblocksize", params)
 
     def dailyblkcount(self, **params):
-        return self.__connect_api("stats", "dailyblkcount", params)
+        return self.etherscan._EtherScanV2__connect_api("stats", "dailyblkcount", params)
 
     def dailyblockrewards(self, **params):
-        return self.__connect_api("stats", "dailyblockrewards", params)
+        return self.etherscan._EtherScanV2__connect_api("stats", "dailyblockrewards", params)
 
     def dailyavgblocktime(self, **params):
-        return self.__connect_api("stats", "dailyavgblocktime", params)
+        return self.etherscan._EtherScanV2__connect_api("stats", "dailyavgblocktime", params)
 
     def dailyuncleblkcount(self, **params):
-        return self.__connect_api("stats", "dailyuncleblkcount", params)
+        return self.etherscan._EtherScanV2__connect_api("stats", "dailyuncleblkcount", params)

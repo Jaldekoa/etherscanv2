@@ -1,12 +1,13 @@
-from etherscanv2 import EtherScanV2
+class Transactions:
 
+    def __init__(self, etherscan):
+        self.etherscan = etherscan
 
-class Transactions(EtherScanV2):
     def getstatus(self, **params):
-        return self.__connect_api("transaction", "getstatus", params)
+        return self.etherscan._EtherScanV2__connect_api("transaction", "getstatus", params)
 
     def gettxreceiptstatus(self, **params):
-        return self.__connect_api("transaction", "gettxreceiptstatus", params)
+        return self.etherscan._EtherScanV2__connect_api("transaction", "gettxreceiptstatus", params)
 
     def gettxreceiptstatus(self, **params):
-        return self.__connect_api("transaction", "gettxreceiptstatus", params)
+        return self.etherscan._EtherScanV2__connect_api("transaction", "gettxreceiptstatus", params)
