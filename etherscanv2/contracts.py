@@ -1,6 +1,6 @@
 class Contracts:
 
-    def __init__(self, etherscan):
+    def __init__(self, etherscan: 'EtherScanV2'):
         self.etherscan = etherscan
 
     def getabi(self, **params):
@@ -19,6 +19,7 @@ class Contracts:
         return self.etherscan._EtherScanV2__connect_api("contract", "checkverifystatus", params)
 
     def verifyproxycontract(self, **params):
+        # ⚠️ ONLY POST METHOD ⚠️
         return self.etherscan._EtherScanV2__connect_api("contract", "verifyproxycontract", params)
 
     def checkproxyverification(self, **params):

@@ -1,6 +1,6 @@
 class GasTracker:
 
-    def __init__(self, etherscan):
+    def __init__(self, etherscan: 'EtherScanV2'):
         self.etherscan = etherscan
 
     def gasestimate(self, **params):

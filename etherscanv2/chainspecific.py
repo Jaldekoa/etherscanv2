@@ -1,6 +1,6 @@
 class ChainSpecific:
 
-    def __init__(self, etherscan):
+    def __init__(self, etherscan: 'EtherSacanV2'):
         self.etherscan = etherscan
 
     def txnbridge(self, **params):
