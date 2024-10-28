@@ -1,6 +1,7 @@
-from etherscanv2 import EtherScanV2
+class ChainSpecific:
 
+    def __init__(self, etherscan):
+        self.etherscan = etherscan
 
-class ChainSpecific(EtherScanV2):
     def txnbridge(self, **params):
-        return self.__connect_api("account", "txnbridge", params)
+        return self.etherscan._EtherScanV2__connect_api("account", "txnbridge", params)

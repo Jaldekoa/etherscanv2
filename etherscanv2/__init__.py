@@ -11,64 +11,65 @@ from stats import Stats
 from chainspecific import ChainSpecific
 from usage import Usage
 import requests
+import inspect
 
 __all__ = ["EtherScanV2", "Accounts", "Contracts", "Transactions", "Blocks", "Logs", "Proxy", "Tokens", "GasTracker", "Stats", "ChainSpecific", "Usage"]
 
 
 class Metadata:
     base_url: str = "https://api.etherscan.io/v2/api"
-    supported_chains: dict[str, int] = {
-        "Etherscan": 1,
-        "Sepolia Etherscan": 11155111,
-        "Holesky Etherscan": 17000,
-        "BscScan": 56,
-        "Testnet BscScan": 97,
-        "PolygonScan": 137,
-        "Testnet PolygonScan": 80002,
-        "zkEVM PolygonScan": 1101,
-        "Testnet zkEVM PolygonScan": 2442,
-        "BaseScan": 8453,
-        "Testnet BaseScan": 84532,
-        "Arbiscan": 42161,
-        "Nova Arbiscan": 42170,
-        "Sepolia Arbiscan": 421614,
-        "LineaScan": 59144,
-        "Testnet LineaScan": 59141,
-        "FTMScan": 250,
-        "Testnet FTMScan": 4002,
-        "BlastScan": 81457,
-        "Testnet BlastScan": 168587773,
-        "Optimistic Etherscan": 10,
-        "Sepolia Optimistic Etherscan": 11155420,
-        "SnowScan": 43114,
-        "Fuji SnowScan": 43113,
-        "BTTCScan": 199,
-        "Donau BTTCScan": 1028,
-        "CeloScan": 42220,
-        "Alfajores CeloScan": 44787,
-        "Cronoscan": 25,
-        "Fraxscan": 252,
-        "Testnet Fraxscan": 2522,
-        "GnosisScan": 100,
-        "KromaScan": 255,
-        "Testnet KromaScan": 2358,
-        "Mantlescan": 5000,
-        "Testnet Mantlescan": 5003,
-        "Moonbeam Moonscan": 1284,
-        "Moonriver Moonscan": 1285,
-        "Moonbase Moonscan": 1287,
-        "opBNB BscScan": 204,
-        "Testnet opBNB BscScan": 5611,
-        "ScrollScan": 534352,
-        "Testnet ScrollScan": 534351,
-        "Taikoscan": 167000,
-        "Testnet Taikoscan": 167009,
-        "WemixScan": 1111,
-        "Testnet WemixScan": 1112,
-        "zkSync Era": 324,
-        "Testnet zkSync Era": 300,
-        "Xaiscan": 660279,
-        "Sepolia Xaiscan": 37714555429
+    supported_chains: dict[str, str] = {
+        "Etherscan": "1",
+        "Sepolia Etherscan": "11155111",
+        "Holesky Etherscan": "17000",
+        "BscScan": "56",
+        "Testnet BscScan": "97",
+        "PolygonScan": "137",
+        "Testnet PolygonScan": "80002",
+        "zkEVM PolygonScan": "1101",
+        "Testnet zkEVM PolygonScan": "2442",
+        "BaseScan": "8453",
+        "Testnet BaseScan": "84532",
+        "Arbiscan": "42161",
+        "Nova Arbiscan": "42170",
+        "Sepolia Arbiscan": "421614",
+        "LineaScan": "59144",
+        "Testnet LineaScan": "59141",
+        "FTMScan": "250",
+        "Testnet FTMScan": "4002",
+        "BlastScan": "81457",
+        "Testnet BlastScan": "168587773",
+        "Optimistic Etherscan": "10",
+        "Sepolia Optimistic Etherscan": "11155420",
+        "SnowScan": "43114",
+        "Fuji SnowScan": "43113",
+        "BTTCScan": "199",
+        "Donau BTTCScan": "1028",
+        "CeloScan": "42220",
+        "Alfajores CeloScan": "44787",
+        "Cronoscan": "25",
+        "Fraxscan": "252",
+        "Testnet Fraxscan": "2522",
+        "GnosisScan": "100",
+        "KromaScan": "255",
+        "Testnet KromaScan": "2358",
+        "Mantlescan": "5000",
+        "Testnet Mantlescan": "5003",
+        "Moonbeam Moonscan": "1284",
+        "Moonriver Moonscan": "1285",
+        "Moonbase Moonscan": "1287",
+        "opBNB BscScan": "204",
+        "Testnet opBNB BscScan": "5611",
+        "ScrollScan": "534352",
+        "Testnet ScrollScan": "534351",
+        "Taikoscan": "167000",
+        "Testnet Taikoscan": "167009",
+        "WemixScan": "1111",
+        "Testnet WemixScan": "1112",
+        "zkSync Era": "324",
+        "Testnet zkSync Era": "300",
+        "Xaiscan": "660279",
+        "Sepolia Xaiscan": "37714555429"
     }
 
     valid_params = {
@@ -167,16 +168,38 @@ class Metadata:
     }
 
 
-class EtherScanV2:
-    def __init__(self, apikey: str, chainid: str) -> None:
+class EtherScanV2():
+    def __init__(self, apikey: str, chainid = Metadata.supported_chains["Etherscan"]) -> None:
         self.__base_url: str = Metadata.base_url
         self.api_key: str = apikey
         self.chain_id: str = chainid
         self.__valid_params = Metadata.valid_params
 
+        self.modules = {
+            'accounts': Accounts(self),
+            'contracts': Contracts(self),
+            'transactions': Transactions(self),
+            'blocks': Blocks(self),
+            'logs': Logs(self),
+            'proxy': Proxy(self),
+            'tokens': Tokens(self),
+            'gastracker': GasTracker(self),
+            'stats': Stats(self),
+            'chainspecific': ChainSpecific(self),
+            'usage': Usage(self)
+        }
+
+        for module in self.modules.values():
+            self._add_module_methods(module)
+
+    def _add_module_methods(self, module):
+        for name, method in inspect.getmembers(module, predicate=inspect.ismethod):
+            if name != "__init__":
+                setattr(self, name, method)
+
     def __connect_api(self, module: str, action: str, params: dict):
         api_params = {k: v for k, v in params.items() if k in self.__valid_params[action]}
-        url = f"{self.__base_url}?module={module}&action={action}&{urlencode(api_params)}"
+        url = f"{self.__base_url}?apikey={self.api_key}&chainid={self.chain_id}&module={module}&action={action}&{urlencode(api_params)}"
         res = requests.get(url).json()
         if res['status'] == '0' or res['message'] == 'NOTOK':
             raise Exception(res['result'])
